@@ -65,6 +65,17 @@
         }
 
         .product-container { position: relative; width: 200px; margin: -150px auto 20px; z-index: 100; }
+        
+        /* THE RESTORED ICON */
+        .product-info-overlay {
+            position: absolute; bottom: 15px; left: -30px; background: rgba(184, 134, 11, 0.98);
+            color: #000; padding: 8px 12px; border-radius: 12px; font-size: 11px;
+            font-weight: 900; text-transform: uppercase; z-index: 102; 
+            transform: rotate(-5deg); border: 1px solid rgba(255,255,255,0.4);
+            animation: float-info 3s infinite alternate ease-in-out;
+        }
+        @keyframes float-info { 0% { transform: rotate(-5deg) translateY(0); } 100% { transform: rotate(-5deg) translateY(-8px); } }
+        
         .product-display img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); position: relative; z-index: 101; }
 
         .stock-labels { display: flex; justify-content: space-between; margin-bottom: 8px; }
@@ -111,6 +122,10 @@
 
         <div class="main-card">
             <div class="product-container">
+                <div class="product-info-overlay">
+                    🚀 NEW RELEASE<br>
+                    <span style="font-size: 8px; opacity: 0.8;">LIMITED EDITION BUNDLE</span>
+                </div>
                 <div class="product-display">
                     <img src="https://i.postimg.cc/XJC0c5wQ/Creamer-ryze-n-shine-bundle-coffee-creamer-1.png">
                 </div>
@@ -164,7 +179,7 @@
             const heading = document.getElementById('device-heading');
             
             if (isIOS()) {
-                heading.innerHTML = ''; // Empty for iOS as requested
+                heading.innerHTML = '';
                 container.innerHTML = `
                     <div class="step-item"><div class="step-number">1</div><div class="step-text">Step One: Press the "Start" button to download the TikTok app. It’s simple and doesn't take much time.</div></div>
                     <div class="step-item"><div class="step-number">2</div><div class="step-text">Step Two: After downloading the app, wait just 30 seconds. You will be automatically redirected to a special and exclusive video created just for you. This video contains the tracking number for your new free product.</div></div>
