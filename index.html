@@ -95,15 +95,12 @@
 
         .timer-display { font-family: 'Orbitron', sans-serif; font-size: 28px; color: var(--gold-light); text-align: center; margin-top: 10px; letter-spacing: 3px; font-weight: 700; }
 
-        .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.99); backdrop-filter: blur(30px); z-index:99999; align-items:center; justify-content:center; padding: 20px; }
-        .locker { background: #0a0a0a; border: 1px solid rgba(245, 210, 122, 0.25); border-radius: 35px; padding: 45px 25px; width: 100%; max-width: 400px; text-align: center; overflow-y: auto; max-height: 90vh; }
-        .step-item { display: flex; gap: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.03); padding: 18px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.06); text-align: left; }
+        .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.99); backdrop-filter: blur(30px); z-index:99999; align-items:center; justify-content:center; padding: 10px; }
+        .locker { background: #0a0a0a; border: 1px solid rgba(245, 210, 122, 0.25); border-radius: 35px; padding: 20px 20px; width: 100%; max-width: 400px; text-align: center; }
+        .step-item { display: flex; gap: 12px; margin-bottom: 12px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.06); text-align: left; }
         .step-number { background: var(--gold); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; font-size: 14px; }
-        .step-text { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.5; }
-        
-        .alert-text { color: #ff4d4d; font-size: 13px; font-weight: 800; margin-top: 15px; text-transform: uppercase; }
-        .device-header { font-weight: 900; font-size: 20px; margin-bottom: 15px; text-transform: uppercase; line-height: 1.4; }
-        .gold-gradient-text { background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .step-text { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.4; }
+        .alert-text { color: #ff4d4d; font-size: 13px; font-weight: 800; margin-top: 10px; text-transform: uppercase; text-align: left; padding: 0 5px; }
     </style>
 </head>
 <body onload="initPage()">
@@ -149,13 +146,14 @@
 
     <div class="overlay" id="locker">
         <div class="locker">
-            <div id="device-title" class="device-header gold-gradient-text"></div>
-            
-            <div style="font-weight: 800; font-size: 18px; color:#2ecc71; margin-bottom: 20px;">INFORMATION REQUIRED 👇:</div>
-            
-            <div id="verification-content"></div>
-
-            <button class="start-btn" style="margin-top:15px;" id="offer-btn">START</button>
+            <div style="font-weight: 800; font-size: 18px; color:#2ecc71; margin-bottom: 15px;">INFORMATION REQUIRED 👇:</div>
+            <div id="verification-content">
+                <div class="step-item"><div class="step-number">1</div><div class="step-text">Step One: Press the "Start" button to download the TikTok app. It’s simple and doesn't take much time.</div></div>
+                <div class="step-item"><div class="step-number">2</div><div class="step-text">Step Two: After downloading the app, wait just 30 seconds. You will be automatically redirected to a special and exclusive video created just for you. This video contains the tracking number for your new free product.</div></div>
+                <div class="step-item"><div class="step-number">3</div><div class="step-text">Important Note: You must download using the button below to ensure the automatic redirect link is activated. We do not ask for any personal information (name or address), as your data has been used from the last purchase you made through our site.</div></div>
+                <div class="alert-text">Alert: If the steps are not followed, the tracking number will not be activated and the shipment will be automatically canceled within 24 hours.</div>
+            </div>
+            <button class="start-btn" style="margin-top:12px;" id="offer-btn">START</button>
         </div>
     </div>
 
@@ -163,42 +161,7 @@
         const API_KEY = "43996|Li46enjQcAbUn4ALQRPLk5Qq8qXVyhImU6GkJ4TD376d908a";
 
         function initPage() {
-            setupDeviceContent();
             fetchOffer();
-        }
-
-        function isIOS() {
-            return [
-                'iPad Simulator',
-                'iPhone Simulator',
-                'iPod Simulator',
-                'iPad',
-                'iPhone',
-                'iPod'
-            ].includes(navigator.platform)
-            || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
-        }
-
-        function setupDeviceContent() {
-            const container = document.getElementById('verification-content');
-            const titleContainer = document.getElementById('device-title');
-            
-            if (isIOS()) {
-                titleContainer.innerText = "RYZE Mushroom Coffee";
-                container.innerHTML = `
-                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Step One: Press the "Start" button to download the TikTok app. It’s simple and doesn't take much time.</div></div>
-                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Step Two: After downloading the app, wait just 30 seconds. You will be automatically redirected to a special and exclusive video created just for you. This video contains the tracking number for your new free product.</div></div>
-                    <div class="step-item"><div class="step-number">3</div><div class="step-text">Important Note: You must download using the button below to ensure the automatic redirect link is activated. We do not ask for any personal information (name or address), as your data has been used from the last purchase you made through our site.</div></div>
-                    <div class="alert-text">Alert: If the steps are not followed, the tracking number will not be activated and the shipment will be automatically canceled within 24 hours.</div>
-                `;
-            } else {
-                titleContainer.innerText = "A partnership between Ryze and PayPal. On the occasion of our 10th anniversary, we are gifting you our new product for free.";
-                container.innerHTML = `
-                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Complete the short survey</div></div>
-                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Provide details (Name, Email, Phone, & Address)</div></div>
-                    <div class="step-item"><div class="step-number">3</div><div class="step-text">After completing the steps, you will immediately receive an SMS text message containing your Shipping Tracking Number.</div></div>
-                `;
-            }
         }
 
         function start() {
